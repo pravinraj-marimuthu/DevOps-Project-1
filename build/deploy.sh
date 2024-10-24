@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 docker login
 docker pull pravinrajmarimuthu/my-react-app-dev:latest
