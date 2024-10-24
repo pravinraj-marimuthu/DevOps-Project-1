@@ -1,0 +1,26 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+        run: |
+          docker-compose -f /opt/devops-build/build/compose.yaml build
+          docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
+          docker tag build-frontend pravinrajmarimuthu/my-react-app-prod
+          docker push pravinrajmarimuthu/my-react-app-prod
+
+          
