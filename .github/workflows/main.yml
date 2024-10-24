@@ -18,7 +18,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
         run: |
-          docker compose -f compose.yaml build
+          docker compose build
           docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
           docker tag build-frontend pravinrajmarimuthu/my-react-app-prod
           docker push pravinrajmarimuthu/my-react-app-prod
