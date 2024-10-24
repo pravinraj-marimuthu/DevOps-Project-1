@@ -2,4 +2,4 @@
 
 docker login
 docker pull pravinrajmarimuthu/my-react-app-dev:latest
-docker compose up -d
+docker-compose up -d
