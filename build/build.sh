@@ -1,6 +1,6 @@
 #!/bin/sh	
 timestamp_tag=$(date +%Y%m%d%H%M%S)
-echo $timestamp_tag > /opt/devops-build/build/versions.txt
+sudo echo $timestamp_tag > /opt/devops-build/build/versions.txt
 echo ""
 echo ""
 echo "Building the latest Docker Image..."
