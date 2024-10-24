@@ -1,40 +1,41 @@
-name: Publish Docker image
+name: Push Docker Image to Docker Hub
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - dev
 
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  push_to_docker_hub:
+    name: Push Docker Image to Docker Hub
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-      attestations: write
-      id-token: write
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
+      - name: Checkout code
+        id: checkout_code
+        uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      - name: Login to Docker Hub
+        id: login_docker_hub
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Echo Docker Hub Username
+        run: echo ${{ secrets.DOCKERHUB_USERNAME }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: pravinrajmarimuthu/my-react-app-prod
+      - name: Echo GitHub SHA
+        run: echo $GITHUB_SHA
 
-      - name: Build and push Docker image
-        id: push
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build Docker image
+        id: build_image
+        run: |
+          docker build "$GITHUB_WORKSPACE" -t ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA --label dockerfile-path="Dockerfile"
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA
+
+      - name: Logout from Docker Hub
+        run: docker logout
+
+      - name: End
+        run: echo "Docker image pushed to Docker Hub successfully"
