@@ -30,7 +30,7 @@ jobs:
       - name: Build Docker image
         id: build_image
         run: |
-          docker build "$GITHUB_WORKSPACE" -t ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA --label dockerfile-path="Dockerfile"
+          docker build "$GITHUB_WORKSPACE" -t ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA --label dockerfile-path="build/Dockerfile"
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA
 
