@@ -3,8 +3,7 @@ name: Push Docker Image to Docker Hub
 on:
   push:
     branches:
-      - dev
-
+      - prod
 jobs:
   push_to_docker_hub:
     name: Push Docker Image to Docker Hub
@@ -31,7 +30,8 @@ jobs:
         id: build_image
         run: |
           docker build "$GITHUB_WORKSPACE" -t ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA --label dockerfile-path="Dockerfile"
-      - name: Push Docker image
+     
+     - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-react-app-prod:$GITHUB_SHA
 
       - name: Logout from Docker Hub
