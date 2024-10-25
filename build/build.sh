@@ -4,7 +4,7 @@ sudo echo $timestamp_tag > /opt/devops-build/build/versions.txt
 echo ""
 echo "Building the latest Docker Image..."
 echo ""
-docker-compose -f /opt/devops-build/build/compose.yaml down
+docker-compose -f /opt/devops-build/build/compose.yaml kill
 echo ""
 docker-compose -f /opt/devops-build/build/compose.yaml build
 echo ""
