@@ -1,0 +1,23 @@
+route:
+  receiver: 'gmail-alert'
+
+receivers:
+  - name: 'gmail-alert'
+    email_configs:
+      - to: 'marimuthupravinraj@gmail.com'         # Destination email
+        from: 'marimuthupravinraj@gmail.com'               # Your Gmail address
+        smarthost: 'smtp.gmail.com:587'
+        auth_username: 'marimuthupravinraj@gmail.com'      # Your Gmail address again
+        auth_password: 'sewi ebdj wtol akzt'         # Use App Password if 2FA is enabled
+        require_tls: true
+groups:
+  - name: alert.rules
+    rules:
+      - alert: InstanceDown
+        expr: up{job="blackbox"} == 0
+        for: 1m
+        labels:
+          severity: "critical"
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} is down."
