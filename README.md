@@ -86,7 +86,7 @@ ___
   ![image](https://github.com/user-attachments/assets/4d449d5e-b1f1-4450-8bba-727d5eed444c)
   ![image](https://github.com/user-attachments/assets/0528b26d-69f4-42ce-9ba5-3421593b1cb3)
 
-**Jenkins hooks detects a push event and triggers the job**
+**Jenkins hooks detects a push event and triggers the jenkins job**
 
   ![image](https://github.com/user-attachments/assets/287bee00-9635-4f06-9915-5674b773ae86)
 
@@ -217,7 +217,7 @@ ___
     2433a1211100   build-frontend   "/docker-entrypoint.…"   Less than a second ago   Up Less than a second   0.0.0.0:80->80/tcp, :::80->80/tcp   frontend
     Finished: SUCCESS
 
-**Post completion of the job, built docker image is pushed to dev repo in Dockerhub**
+**Post completion of the job, Docker image is built with a dynamic tag and pushed to dev repo in Dockerhub**
 
   ![image](https://github.com/user-attachments/assets/b1c0cbd1-8c6d-4a71-a268-7f20d78d7ded)
 
