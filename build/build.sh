@@ -12,7 +12,7 @@ docker tag build-frontend pravinrajmarimuthu/my-react-app-dev:$(cat /opt/devops-
 echo ""
 echo "Pushing the image to Docker Hub..."
 echo ""
-docker login --username pravinrajmarimuthu --password Iampravin7010
+docker login --username pravinrajmarimuthu --password <Dockerhub password>
 echo ""
 docker push pravinrajmarimuthu/my-react-app-dev:$(cat /opt/devops-build/build/versions.txt)
 echo ""
