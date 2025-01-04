@@ -1,6 +1,6 @@
 #!/bin/sh	
 timestamp_tag=$(date +%Y%m%d%H%M%S)
-sudo echo $timestamp_tag > /opt/My-React-App/build/versions.txt
+echo $timestamp_tag > /opt/My-React-App/build/versions.txt
 echo ""
 echo "Building the latest Docker Image..."
 echo ""
