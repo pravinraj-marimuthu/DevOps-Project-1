@@ -1,10 +1,18 @@
 #!/bin/sh	
 timestamp_tag=$(date +%Y%m%d%H%M%S)
+<<<<<<< HEAD
 sudo echo $timestamp_tag > /opt/My-React-App/build/versions.txt
 echo ""
 echo "Building the latest Docker Image..."
 echo ""
 docker-compose -f /opt/My-React-App/build/compose.yaml down
+=======
+echo $timestamp_tag > /opt/My-React-App/build/versions.txt
+echo ""
+echo "Building the latest Docker Image..."
+echo ""
+docker-compose -f /opt/My-React-App/build/compose.yaml kill
+>>>>>>> dev
 echo ""
 docker-compose -f /opt/My-React-App/build/compose.yaml build
 echo ""
